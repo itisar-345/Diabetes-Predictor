@@ -17,6 +17,14 @@ def predict_diabetes(user_data):
     """
     Takes user data as input, predicts diabetes status, and provides feedback.
     """
+
+    # Print the input data for debugging
+    print("User Data:", user_data)
+
+     # Handle missing values by filling with 0 (or another appropriate value)
+    user_data = user_data.fillna(0)
+    print("User Data after filling missing values:", user_data)
+    
     prediction = model.predict(user_data)[0]
     probabilities = model.predict_proba(user_data)[0]
     feedback = generate_feedback(prediction, user_data)
