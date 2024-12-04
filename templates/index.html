@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Diabetes Health Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+      <h1>Diabetes Health Prediction</h1>
+    </header>
+  
+    <main>
+      <section class="details-section">
+        <h2>Important Information</h2>
+        <p>
+          <strong>This tool is for informational purposes only.</strong> 
+          <br>
+          Please consult a healthcare professional for accurate diagnosis and treatment. 
+          Our model provides predictions based on the data you provide, but it is not 100% accurate. 
+        </p>
+  
+        <p>
+          <strong>Model Prediction Accuracy:</strong> 85.4%  
+          <br>
+          While this accuracy is decent, it should not replace professional medical advice. 
+          Always consult a doctor for detailed health evaluations.
+        </p>
+  
+        <!-- Button to open the form -->
+          <section class="intro-section">
+              <button id="open-form">Check Your Health</button>
+          </section>
+  
+        <h2>Model Insights</h2>
+        <p>
+          Below, you can see our model's confusion matrix and classification report, which provide insights into how our model performs.
+          If you are familiar with Machine Learning concepts, you will understand these metrics better.
+        </p>
+        
+        <!-- Model visuals -->
+        <div class="visualization">
+          <h3>Prediction Accuracy Over Time</h3>
+          <img src="Figure_2.png" alt="Accuracy Chart">
+  
+          <h3>Confusion Matrix</h3>
+          <img src="Figure_1.png" alt="Confusion Matrix">
+        </div>
+      </section>
+  
+      <!-- Form overlay -->
+      <div id="overlay" class="overlay">
+          <div class="form-popup">
+            <button class="close-btn" id="close-form">&times;</button>
+            <h2>Diabetes Predictor</h2>
+            
+            <form action="/predict" method="post">
+              <label for="HighBP">High Blood Pressure:</label>
+              <div class="options">
+                  <label><input type="radio" name="HighBP" value="1" required> Yes</label>
+                  <label><input type="radio" name="HighBP" value="0"> No</label>
+              </div>
+  
+              <label for="HighChol">High Cholesterol:</label>
+              <div class="options">
+                  <label><input type="radio" name="HighChol" value="1" required> Yes</label>
+                  <label><input type="radio" name="HighChol" value="0"> No</label>
+              </div>
+  
+              <label for="CholCheck">Cholesterol Check in past 5 years:</label>
+              <div class="options">
+                  <label><input type="radio" name="CholCheck" value="1" required> Yes</label>
+                  <label><input type="radio" name="CholCheck" value="0"> No</label>
+              </div>
+  
+              <label for="Smoker">Smoker:</label>
+              <div class="options">
+                  <label><input type="radio" name="Smoker" value="1" required> Yes</label>
+                  <label><input type="radio" name="Smoker" value="0"> No</label>
+              </div>
+  
+              <label for="Stroke">Stroke:</label>
+              <div class="options">
+                  <label><input type="radio" name="Stroke" value="1" required> Yes</label>
+                  <label><input type="radio" name="Stroke" value="0"> No</label>
+              </div>
+  
+              <label for="HeartDiseaseorAttack">Heart Disease or Attack:</label>
+              <div class="options">
+                  <label><input type="radio" name="HeartDiseaseorAttack" value="1" required> Yes</label>
+                  <label><input type="radio" name="HeartDiseaseorAttack" value="0"> No</label>
+              </div>
+  
+              <label for="PhysActivity">Physical Activity in past 30 days:</label>
+              <div class="options">
+                  <label><input type="radio" name="PhysActivity" value="1" required> Yes</label>
+                  <label><input type="radio" name="PhysActivity" value="0"> No</label>
+              </div>
+  
+              <label for="Fruits">Consume Fruits Frequently:</label>
+              <div class="options">
+                  <label><input type="radio" name="Fruits" value="1" required> Yes</label>
+                  <label><input type="radio" name="Fruits" value="0"> No</label>
+              </div>
+  
+              <label for="Veggies">Consume Vegetables Frequently:</label>
+              <div class="options">
+                  <label><input type="radio" name="Veggies" value="1" required> Yes</label>
+                  <label><input type="radio" name="Veggies" value="0"> No</label>
+              </div>
+  
+              <label for="HvyAlcoholConsump">Heavy Alcohol Consumption:</label>
+              <div class="options">
+                  <label><input type="radio" name="HvyAlcoholConsump" value="1" required> Yes</label>
+                  <label><input type="radio" name="HvyAlcoholConsump" value="0"> No</label>
+              </div>
+  
+              <label for="AnyHealthcare">Do you have Healthcare?</label>
+              <div class="options">
+                  <label><input type="radio" name="AnyHealthcare" value="1" required> Yes</label>
+                  <label><input type="radio" name="AnyHealthcare" value="0"> No</label>
+              </div>
+  
+              <label for="NoDocbcCost">Avoided Doctor due to Cost:</label>
+              <div class="options">
+                  <label><input type="radio" name="NoDocbcCost" value="1" required> Yes</label>
+                  <label><input type="radio" name="NoDocbcCost" value="0"> No</label>
+              </div>
+  
+              <label for="GenHlth">General Health:</label>
+              <div class="options">
+                  <label><input type="radio" name="GenHlth" value="1" required> Excellent</label>
+                  <label><input type="radio" name="GenHlth" value="2"> Very Good</label>
+                  <label><input type="radio" name="GenHlth" value="3"> Good</label>
+                  <label><input type="radio" name="GenHlth" value="4"> Fair</label>
+                  <label><input type="radio" name="GenHlth" value="5"> Poor</label>
+              </div>
+  
+              <label for="MentHlth">Days of Bad Mental Health (0-30):</label>
+              <input type="number" name="MentHlth" min="0" max="30" required>
+  
+              <label for="PhysHlth">Days of Bad Physical Health (0-30):</label>
+              <input type="number" name="PhysHlth" min="0" max="30" required>
+  
+              <label for="DiffWalk">Difficulty Walking:</label>
+              <div class="options">
+                  <label><input type="radio" name="DiffWalk" value="1" required> Yes</label>
+                  <label><input type="radio" name="DiffWalk" value="0"> No</label>
+              </div>
+  
+              <label for="Sex">Sex:</label>
+              <div class="options">
+                  <label><input type="radio" name="Sex" value="1" required> Male</label>
+                  <label><input type="radio" name="Sex" value="0"> Female</label>
+              </div>
+  
+              <!-- Dropdowns for Age, Education, Income -->
+              <label for="Age">Age Category:</label>
+              <select name="Age" required>
+                  <option value="13">80+ years</option>
+                  <option value="12">70-74 years</option>
+                  <option value="11">65-69 years</option>
+                  <option value="10">60-64 years</option>
+                  <option value="9">55-59 years</option>
+                  <option value="8">50-54 years</option>
+                  <option value="7">45-49 years</option>
+                  <option value="6">40-44 years</option>
+                  <option value="5">35-39 years</option>
+                  <option value="4">30-34 years</option>
+                  <option value="3">25-29 years</option>
+                  <option value="2">18-24 years</option>
+                  <option value="1"><18 years</option>
+              </select>
+  
+              <label for="Education">Education Level:</label>
+              <select name="Education" required>
+                  <option value="1">Never attended school</option>
+                  <option value="2">Grades 1-8 (Elementary)</option>
+                  <option value="3">Grades 9-11 (Some High School)</option>
+                  <option value="4">Grade 12 or GED (High School Graduate)</option>
+                  <option value="5">Some college or technical school</option>
+                  <option value="6">College graduate</option>
+              </select>
+  
+              <label for="Income">Income Level:</label>
+              <select name="Income" required>
+                  <option value="1">Less than $10,000</option>
+                  <option value="2">$10,000 to less than $15,000</option>
+                  <option value="3">$15,000 to less than $20,000</option>
+                  <option value="4">$20,000 to less than $25,000</option>
+                  <option value="5">$25,000 to less than $35,000</option>
+                  <option value="6">$35,000 to less than $50,000</option>
+                  <option value="7">$50,000 to less than $75,000</option>
+                  <option value="8">$75,000 or more</option>
+              </select>
+  
+              <input type="submit" value="Predict">
+            </form>
+          </div>
+      </div>
+      
+    </main>
+  
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  
+  </body>
+</html>

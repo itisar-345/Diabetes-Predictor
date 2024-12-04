@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prediction Result</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Diabetes Prediction Result</h1>
+        <div class="feedback">
+            {{ feedback | safe }}
+        </div>
+        <div class="plot">
+            <h3>Prediction Probabilities</h3>
+            <img src="data:image/png;base64,{{ plot_url }}" alt="Prediction Probabilities">
+        </div>
+        <div class="footer">
+            <p>This result is based on your inputs and is for informational purposes only.</p>
+        </div>
+</body>
+</html>
