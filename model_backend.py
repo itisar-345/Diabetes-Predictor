@@ -4,18 +4,19 @@ import io
 import base64
 import pickle
 import requests
+import os 
 
-# URL for Google Drive direct download
-url = "https://drive.google.com/file/d/1p9Mkz4a2ITrdef3PC7OT2b4D9XAY_yDi/view?usp=sharing"
+url = os.getenv("MODEL_LINK")  
 
-# Fetch the model file from Google Drive
+if not url:
+    raise ValueError("MODEL_LINK environment variable is not set!")
 response = requests.get(url)
 
 if response.status_code == 200:
     model = pickle.load(io.BytesIO(response.content))
     print("Model loaded successfully!")
 else:
-    raise Exception("Failed to fetch the model from Google Drive.")
+    raise Exception("Failed to fetch the model from the provided link.")
 
 def predict_diabetes(user_data):
     """
