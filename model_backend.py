@@ -24,7 +24,27 @@ def predict_diabetes(user_data):
      # Handle missing values by filling with 0 (or another appropriate value)
     user_data = user_data.fillna(0)
     print("User Data after filling missing values:", user_data)
-    
+
+    # Ensure correct data types
+    user_data['BMI'] = user_data['BMI'].astype(float) 
+    user_data['Age'] = user_data['Age'].astype(int)  
+    user_data['HighBP'] = user_data['HighBP'].astype(int)
+    user_data['HighChol'] = user_data['HighChol'].astype(int)
+    user_data['Smoker'] = user_data['Smoker'].astype(int)
+    user_data['PhysActivity'] = user_data['PhysActivity'].astype(int)
+    user_data['Fruits'] = user_data['Fruits'].astype(int)
+    user_data['Veggies'] = user_data['Veggies'].astype(int)
+    user_data['HvyAlcoholConsump'] = user_data['HvyAlcoholConsump'].astype(int)
+    user_data['AnyHealthcare'] = user_data['AnyHealthcare'].astype(int)
+    user_data['NoDocbcCost'] = user_data['NoDocbcCost'].astype(int)
+    user_data['GenHlth'] = user_data['GenHlth'].astype(int)
+    user_data['MentHlth'] = user_data['MentHlth'].astype(int)
+    user_data['PhysHlth'] = user_data['PhysHlth'].astype(int)
+    user_data['DiffWalk'] = user_data['DiffWalk'].astype(int)
+    user_data['Sex'] = user_data['Sex'].astype(int)
+    user_data['Education'] = user_data['Education'].astype(int)
+    user_data['Income'] = user_data['Income'].astype(int)
+
     prediction = model.predict(user_data)[0]
     probabilities = model.predict_proba(user_data)[0]
     feedback = generate_feedback(prediction, user_data)
