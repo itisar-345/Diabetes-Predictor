@@ -2,21 +2,16 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import io
 import base64
-import pickle
-import requests
-import os 
+import joblib
 
-url = os.getenv("MODEL_LINK")  
+# Load the model directly from the local file system
+model_path = "model_compressed.joblib" 
 
-if not url:
-    raise ValueError("MODEL_LINK environment variable is not set!")
-response = requests.get(url)
-
-if response.status_code == 200:
-    model = pickle.load(io.BytesIO(response.content))
-    print("Model loaded successfully!")
-else:
-    raise Exception("Failed to fetch the model from the provided link.")
+try:
+    model = joblib.load(model_path)
+    print("Model loaded successfully from local file!")
+except FileNotFoundError:
+    raise Exception(f"Model file not found at {model_path}. Please check the file path.")
 
 def predict_diabetes(user_data):
     """

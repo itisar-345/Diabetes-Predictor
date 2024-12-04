@@ -16,7 +16,7 @@ y = df_012['Diabetes_012']               # Target variable (0: healthy, 1: predi
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
 
 # Train Random Forest Classifier
-model = RandomForestClassifier(n_estimators=100, random_state=42)
+model = RandomForestClassifier(n_estimators=30, random_state=42)
 model.fit(X_train, y_train)
 
 def plot_plan_random_forest_accuracy():
