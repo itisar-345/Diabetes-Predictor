@@ -26,11 +26,14 @@ def predict_diabetes(user_data):
     print("User Data after filling missing values:", user_data)
 
     # Ensure correct data types
-    user_data['BMI'] = user_data['BMI'].astype(float) 
+    user_data['BMI'] = user_data['BMI'].astype(int) 
     user_data['Age'] = user_data['Age'].astype(int)  
     user_data['HighBP'] = user_data['HighBP'].astype(int)
     user_data['HighChol'] = user_data['HighChol'].astype(int)
+    user_data['CholCheck'] = user_data['CholCheck'].astype(int)
     user_data['Smoker'] = user_data['Smoker'].astype(int)
+    user_data['Stroke'] = user_data['Stroke'].astype(int)
+    user_data['HeartDiseaseorAttack'] = user_data['HeartDiseaseorAttack'].astype(int)
     user_data['PhysActivity'] = user_data['PhysActivity'].astype(int)
     user_data['Fruits'] = user_data['Fruits'].astype(int)
     user_data['Veggies'] = user_data['Veggies'].astype(int)
@@ -114,6 +117,33 @@ def generate_feedback(prediction, user_data):
         feedback += "<li><strong>Your BMI indicates obesity. Consider consulting a dietitian to create a sustainable weight-loss plan.</strong></li>"
         feedback += "<li>Focus on gradual weight loss of 1-2 pounds per week.</li>"
         feedback += "<li>Reduce processed and fast foods, and choose home-cooked meals.</li>"
+        feedback += "</ul>"
+
+    # Cholesterol Check Feedback
+    if user_data['CholCheck'].iloc[0] == 0:
+        feedback += '<ul class="chol-check-feedback">'
+        feedback += "<li><strong>You haven't had a cholesterol check recently. Regular cholesterol monitoring is essential for early detection of heart disease risks.</li></strong>"
+        feedback += "<li>Consider scheduling a cholesterol test with your healthcare provider.</li>"
+        feedback += "<li>Knowing your cholesterol levels helps guide dietary and lifestyle choices.</li>"
+        feedback += "</ul>"
+
+    # Stroke Feedback
+    if user_data['Stroke'].iloc[0] == 1:
+        feedback += '<ul class="stroke-feedback">'
+        feedback += "<li><strong>You reported a history of stroke. Maintaining a heart-healthy lifestyle is critical for prevention of future strokes.</li></strong>"
+        feedback += "<li>Follow your doctor's advice, including prescribed medications and check-ups.</li>"
+        feedback += "<li>Focus on managing blood pressure, cholesterol, and stress levels.</li>"
+        feedback += "<li>Incorporate low-sodium meals and regular exercise into your daily routine.</li>"
+        feedback += "</ul>"
+
+    # Heart Disease or Attack Feedback
+    if user_data['HeartDiseaseorAttack'].iloc[0] == 1:
+        feedback += '<ul class="heart-disease-feedback">'
+        feedback += "<li><strong>You reported a history of heart disease or heart attack. Cardiac health management is crucial to prevent complications.</li></strong>"
+        feedback += "<li>Stay consistent with follow-up appointments and medications.</li>"
+        feedback += "<li>Engage in light to moderate exercise, as recommended by your healthcare provider.</li>"
+        feedback += "<li>A heart-healthy diet low in saturated fats, trans fats, and cholesterol is essential.</li>"
+        feedback += "<li>Manage stress through relaxation techniques like meditation or yoga.</li>"
         feedback += "</ul>"
 
     # Smoking-related feedback

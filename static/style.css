@@ -224,7 +224,19 @@ body {
   .feedback .bmi-feedback li {
     color: #D4AF37; 
   }
-  
+
+  .feedback .chol-check-feedback li {
+    color: #16a085; 
+  }
+
+  .feedback .stroke-feedback li {
+    color: #e74c3c; 
+  }
+
+  .feedback .heart-disease-feedback li {
+    color: #c0392b; 
+  }
+
   .feedback .smoking-feedback li {
     color: #ff5733; 
   }
