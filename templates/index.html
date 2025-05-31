@@ -6,7 +6,11 @@
 </head>
 <body>
     <header>
-      <h1>Diabetes Health Prediction</h1>
+      <div class="logo">
+        <div class="logo-icon"></div>
+        <h1>DiabetesCheck</h1>
+      </div>
+      <p class="tagline">Assess your diabetes risk factors</p>
     </header>
   
     <main>
@@ -49,156 +53,396 @@
   
       <!-- Form overlay -->
       <div id="overlay" class="overlay">
-          <div class="form-popup">
-            <button class="close-btn" id="close-form">&times;</button>
-            <h2>Diabetes Predictor</h2>
-            
-            <form action="/predict" method="post">
-              <label for="HighBP">High Blood Pressure:</label>
-              <div class="options">
-                  <label><input type="radio" name="HighBP" value="1" required> Yes</label>
-                  <label><input type="radio" name="HighBP" value="0"> No</label>
+        <div class="form-container">
+          <button class="close-btn" id="close-form">&times;</button>
+          
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-steps">
+              <div class="progress-step active">
+                <div class="step-number">1</div>
+                <div class="step-label">Personal</div>
               </div>
-  
-              <label for="HighChol">High Cholesterol:</label>
-              <div class="options">
-                  <label><input type="radio" name="HighChol" value="1" required> Yes</label>
-                  <label><input type="radio" name="HighChol" value="0"> No</label>
+              <div class="progress-step">
+                <div class="step-number">2</div>
+                <div class="step-label">Health</div>
               </div>
-  
-              <label for="CholCheck">Cholesterol Check in past 5 years:</label>
-              <div class="options">
-                  <label><input type="radio" name="CholCheck" value="1" required> Yes</label>
-                  <label><input type="radio" name="CholCheck" value="0"> No</label>
+              <div class="progress-step">
+                <div class="step-number">3</div>
+                <div class="step-label">Lifestyle</div>
+              </div>
+              <div class="progress-step">
+                <div class="step-number">4</div>
+                <div class="step-label">Complete</div>
+              </div>
+            </div>
+          </div>
+          
+          <form id="diabetes-assessment" action="/predict" method="post">
+            <!-- Section 1: Personal Information -->
+            <section class="form-section active" id="section-1">
+              <h2>Personal Information</h2>
+              
+              <div class="form-group">
+                <label for="Age">Age Category</label>
+                <select id="age" name="Age" required>
+                  <option value="" disabled selected>Select your age group</option>
+                  <option value="1">Under 18 years</option>
+                  <option value="2">18-24 years</option>
+                  <option value="3">25-29 years</option>
+                  <option value="4">30-34 years</option>
+                  <option value="5">35-39 years</option>
+                  <option value="6">40-44 years</option>
+                  <option value="7">45-49 years</option>
+                  <option value="8">50-54 years</option>
+                  <option value="9">55-59 years</option>
+                  <option value="10">60-64 years</option>
+                  <option value="11">65-69 years</option>
+                  <option value="12">70-74 years</option>
+                  <option value="13">80 years or older</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="Sex">Sex</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="Sex" value="0" required>
+                    <span class="radio-custom"></span>
+                    Female
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="Sex" value="1">
+                    <span class="radio-custom"></span>
+                    Male
+                  </label>
+                </div>
               </div>
 
-              <label for="BMI">Body Mass Index (BMI):</label>
-              <input type="number" name="BMI" step="0.1" min="0" max="50" required>
-  
-              <label for="Smoker">Smoker:</label>
-              <div class="options">
-                  <label><input type="radio" name="Smoker" value="1" required> Yes</label>
-                  <label><input type="radio" name="Smoker" value="0"> No</label>
+              <div class="form-group">
+                <label for="Education">Education Level</label>
+                <select id="education" name="Education" required>
+                  <option value="" disabled selected>Select your education level</option>
+                  <option value="1">Never attended school or only kindergarten</option>
+                  <option value="2">Grades 1 through 8 (Elementary)</option>
+                  <option value="3">Grades 9 through 11 (Some high school)</option>
+                  <option value="4">Grade 12 or GED (High school graduate)</option>
+                  <option value="5">College 1 year to 3 years (Some college or technical school)</option>
+                  <option value="6">College 4 years or more (College graduate)</option>
+                </select>
               </div>
-  
-              <label for="Stroke">Stroke:</label>
-              <div class="options">
-                  <label><input type="radio" name="Stroke" value="1" required> Yes</label>
-                  <label><input type="radio" name="Stroke" value="0"> No</label>
+              
+              <div class="form-group">
+                <label for="Income">Income Level</label>
+                <select id="income" name="Income" required>
+                  <option value="" disabled selected>Select your income level</option>
+                  <option value="1">Less than ₹8,00,000</option>
+                  <option value="2">₹8,00,000 to less than ₹12,00,000</option>
+                  <option value="3">₹12,00,000 to less than ₹17,00,000</option>
+                  <option value="4">₹17,00,000 to less than ₹21,00,000</option>
+                  <option value="5">₹21,00,000 to less than ₹25,00,000</option>
+                  <option value="6">₹25,00,000 to less than ₹40,00,000</option>
+                  <option value="7">₹40,00,000 to less than ₹60,00,000</option>
+                  <option value="8">₹60,00,000 or more</option>
+                </select>
               </div>
-  
-              <label for="HeartDiseaseorAttack">Heart Disease or Attack:</label>
-              <div class="options">
-                  <label><input type="radio" name="HeartDiseaseorAttack" value="1" required> Yes</label>
-                  <label><input type="radio" name="HeartDiseaseorAttack" value="0"> No</label>
+
+              <div class="form-navigation">
+                <button type="button" class="btn btn-next" onclick="nextSection(1)">Continue to Health Information</button>
               </div>
-  
-              <label for="PhysActivity">Physical Activity in past 30 days:</label>
-              <div class="options">
-                  <label><input type="radio" name="PhysActivity" value="1" required> Yes</label>
-                  <label><input type="radio" name="PhysActivity" value="0"> No</label>
+            </section>
+
+            <!-- Section 2: Health Information -->
+            <section class="form-section" id="section-2">
+              <h2>Health Information</h2>
+              
+              <div class="form-group">
+                <label for="BMI">Body Mass Index (BMI)</label>
+                <input type="number" id="bmi" name="BMI" min="10" max="60" step="0.1" required>
+                <div class="slider-container">
+                  <input type="range" min="10" max="60" step="0.1" class="slider" id="bmi-slider">
+                  <div class="slider-labels">
+                    <span>10</span>
+                    <span>25</span>
+                    <span>40</span>
+                    <span>60</span>
+                  </div>
+                </div>
               </div>
-  
-              <label for="Fruits">Consume Fruits Frequently:</label>
-              <div class="options">
-                  <label><input type="radio" name="Fruits" value="1" required> Yes</label>
-                  <label><input type="radio" name="Fruits" value="0"> No</label>
+
+              <div class="form-group">
+                <label for="HighBP">High Blood Pressure</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="HighBP" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="HighBP" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
               </div>
-  
-              <label for="Veggies">Consume Vegetables Frequently:</label>
-              <div class="options">
-                  <label><input type="radio" name="Veggies" value="1" required> Yes</label>
-                  <label><input type="radio" name="Veggies" value="0"> No</label>
+
+              <div class="form-group">
+                <label for="HighChol">High Cholesterol</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="HighChol" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="HighChol" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
               </div>
-  
-              <label for="HvyAlcoholConsump">Heavy Alcohol Consumption:</label>
-              <div class="options">
-                  <label><input type="radio" name="HvyAlcoholConsump" value="1" required> Yes</label>
-                  <label><input type="radio" name="HvyAlcoholConsump" value="0"> No</label>
+
+              <div class="form-group">
+                <label for="CholCheck">Cholesterol Check in Past 5 Years</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="CholCheck" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="CholCheck" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
               </div>
-  
-              <label for="AnyHealthcare">Do you have Healthcare?</label>
-              <div class="options">
-                  <label><input type="radio" name="AnyHealthcare" value="1" required> Yes</label>
-                  <label><input type="radio" name="AnyHealthcare" value="0"> No</label>
+
+              <div class="form-group">
+                <label for="Stroke">Stroke History</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="Stroke" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="Stroke" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
               </div>
-  
-              <label for="NoDocbcCost">Avoided Doctor due to Cost:</label>
-              <div class="options">
-                  <label><input type="radio" name="NoDocbcCost" value="1" required> Yes</label>
-                  <label><input type="radio" name="NoDocbcCost" value="0"> No</label>
+
+              <div class="form-group">
+                <label for="HeartDiseaseorAttack">Heart Disease or Attack</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="HeartDiseaseorAttack" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="HeartDiseaseorAttack" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
               </div>
-  
-              <label for="GenHlth">General Health:</label>
-              <div class="options">
-                  <label><input type="radio" name="GenHlth" value="1" required> Excellent</label>
-                  <label><input type="radio" name="GenHlth" value="2"> Very Good</label>
-                  <label><input type="radio" name="GenHlth" value="3"> Good</label>
-                  <label><input type="radio" name="GenHlth" value="4"> Fair</label>
-                  <label><input type="radio" name="GenHlth" value="5"> Poor</label>
+
+              <div class="form-group">
+                <label for="GenHlth">General Health Rating</label>
+                <select id="genhlth" name="GenHlth" required>
+                  <option value="" disabled selected>Rate your general health</option>
+                  <option value="1">Excellent</option>
+                  <option value="2">Very good</option>
+                  <option value="3">Good</option>
+                  <option value="4">Fair</option>
+                  <option value="5">Poor</option>
+                </select>
               </div>
-  
-              <label for="MentHlth">Days of Bad Mental Health (0-30):</label>
-              <input type="number" name="MentHlth" min="0" max="30" required>
-  
-              <label for="PhysHlth">Days of Bad Physical Health (0-30):</label>
-              <input type="number" name="PhysHlth" min="0" max="30" required>
-  
-              <label for="DiffWalk">Difficulty Walking:</label>
-              <div class="options">
-                  <label><input type="radio" name="DiffWalk" value="1" required> Yes</label>
-                  <label><input type="radio" name="DiffWalk" value="0"> No</label>
+
+              <div class="form-group">
+                <label for="MentHlth">Mental Health (Days not good, past 30 days)</label>
+                <input type="number" id="menthlth" name="MentHlth" min="0" max="30" required>
+                <div class="slider-container">
+                  <input type="range" min="0" max="30" class="slider" id="menthlth-slider">
+                  <div class="slider-labels">
+                    <span>0</span>
+                    <span>10</span>
+                    <span>20</span>
+                    <span>30</span>
+                  </div>
+                </div>
               </div>
-  
-              <label for="Sex">Sex:</label>
-              <div class="options">
-                  <label><input type="radio" name="Sex" value="1" required> Male</label>
-                  <label><input type="radio" name="Sex" value="0"> Female</label>
+
+              <div class="form-group">
+                <label for="PhysHlth">Physical Health (Days not good, past 30 days)</label>
+                <input type="number" id="physhlth" name="PhysHlth" min="0" max="30" required>
+                <div class="slider-container">
+                  <input type="range" min="0" max="30" class="slider" id="physhlth-slider">
+                  <div class="slider-labels">
+                    <span>0</span>
+                    <span>10</span>
+                    <span>20</span>
+                    <span>30</span>
+                  </div>
+                </div>
               </div>
-  
-              <!-- Dropdowns for Age, Education, Income -->
-              <label for="Age">Age Category:</label>
-              <select name="Age" required>
-                  <option value="13">80+ years</option>
-                  <option value="12">70-74 years</option>
-                  <option value="11">65-69 years</option>
-                  <option value="10">60-64 years</option>
-                  <option value="9">55-59 years</option>
-                  <option value="8">50-54 years</option>
-                  <option value="7">45-49 years</option>
-                  <option value="6">40-44 years</option>
-                  <option value="5">35-39 years</option>
-                  <option value="4">30-34 years</option>
-                  <option value="3">25-29 years</option>
-                  <option value="2">18-24 years</option>
-                  <option value="1"><18 years</option>
-              </select>
-  
-              <label for="Education">Education Level:</label>
-              <select name="Education" required>
-                  <option value="1">Never attended school</option>
-                  <option value="2">Grades 1-8 (Elementary)</option>
-                  <option value="3">Grades 9-11 (Some High School)</option>
-                  <option value="4">Grade 12 or GED (High School Graduate)</option>
-                  <option value="5">Some college or technical school</option>
-                  <option value="6">College graduate</option>
-              </select>
-  
-              <label for="Income">Income Level:</label>
-              <select name="Income" required>
-                  <option value="1">Less than ₹10,000</option>
-                  <option value="2">₹10,000 to less than ₹15,000</option>
-                  <option value="3">₹15,000 to less than ₹20,000</option>
-                  <option value="4">₹20,000 to less than ₹25,000</option>
-                  <option value="5">₹25,000 to less than ₹35,000</option>
-                  <option value="6">₹35,000 to less than ₹50,000</option>
-                  <option value="7">₹50,000 to less than ₹75,000</option>
-                  <option value="8">₹75,000 or more</option>
-              </select>
-  
-              <input type="submit" value="Predict">
-            </form>
-          </div>
+
+              <div class="form-group">
+                <label for="DiffWalk">Difficulty Walking or Climbing Stairs</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="DiffWalk" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="DiffWalk" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-navigation">
+                <button type="button" class="btn btn-prev" onclick="prevSection(2)">Back</button>
+                <button type="button" class="btn btn-next" onclick="nextSection(2)">Continue to Lifestyle</button>
+              </div>
+            </section>
+
+            <!-- Section 3: Lifestyle -->
+            <section class="form-section" id="section-3">
+              <h2>Lifestyle Information</h2>
+              
+              <div class="form-group">
+                <label for="Smoker">Smoker (At least 100 cigarettes in lifetime)</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="Smoker" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="Smoker" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="PhysActivity">Physical Activity in Past 30 Days</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="PhysActivity" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="PhysActivity" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="Fruits">Fruit Consumption (1+ times per day)</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="Fruits" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="Fruits" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="Veggies">Vegetable Consumption (1+ times per day)</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="Veggies" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="Veggies" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="HvyAlcoholConsump">Heavy Alcohol Consumption</label>
+                <div class="help-text">
+                  <small>Heavy drinkers: adult men having more than 14 drinks per week and adult women having more than 7 drinks per week</small>
+                </div>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="HvyAlcoholConsump" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="HvyAlcoholConsump" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="AnyHealthcare">Any Healthcare Coverage</label>
+                <div class="help-text">
+                  <small>Including health insurance, prepaid plans such as HMOs, Mediclaim etc.</small>
+                </div>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="AnyHealthcare" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="AnyHealthcare" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="NoDocbcCost">Could Not See Doctor Due to Cost</label>
+                <div class="radio-group">
+                  <label class="radio-container">
+                    <input type="radio" name="NoDocbcCost" value="0" required>
+                    <span class="radio-custom"></span>
+                    No
+                  </label>
+                  <label class="radio-container">
+                    <input type="radio" name="NoDocbcCost" value="1">
+                    <span class="radio-custom"></span>
+                    Yes
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-navigation">
+                <button type="button" class="btn btn-prev" onclick="prevSection(3)">Back</button>
+                <button type="submit" class="btn btn-submit">Submit</button>
+              </div>
+            </section>
+          </form>
+        </div>
       </div>
 
     <div class="footer">
