@@ -236,6 +236,9 @@ body {
   .form-section {
     display: none;
     padding: 1.5rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    scroll-behavior: smooth;
   }
 
   .form-section.active {
