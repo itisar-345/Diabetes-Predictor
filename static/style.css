@@ -236,7 +236,7 @@ body {
   .form-section {
     display: none;
     padding: 1.5rem;
-    max-height: 80vh;
+    max-height: 70vh;
     overflow-y: auto;
     scroll-behavior: smooth;
   }
@@ -466,37 +466,6 @@ body {
   .completion-message {
     text-align: center;
     padding: 2rem 1.5rem;
-  }
-
-  .completion-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.25rem;
-    background-color: #28a745;
-    border-radius: 9999px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .completion-icon::before,
-  .completion-icon::after {
-    content: "";
-    position: absolute;
-    background-color: white;
-  }
-
-  .completion-icon::before {
-    width: 30px;
-    height: 6px;
-    transform: rotate(45deg) translate(5px, 10px);
-  }
-
-  .completion-icon::after {
-    width: 45px;
-    height: 6px;
-    transform: rotate(-45deg);
   }
 
   .completion-message h2 {
